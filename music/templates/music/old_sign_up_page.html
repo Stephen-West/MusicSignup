@@ -1,0 +1,17 @@
+<h1>Music signup table for {{event.event_name}} ({{event.date}})</h1>
+
+<table border=1>
+{% for piece in event.piece_set.all %}
+<tr>
+	<td rowspan=2><a href="/pieces/{{piece.id}}/">{{piece.piece_name}}</a></td>
+	<td>{{piece.composer	}}</td>
+	{% for part in piece.part_set.all %}
+		<td>{{part.part_name}}<br>{{part.player.player_name}}</td>
+	{% endfor %}
+</tr>
+<tr>
+	<td>{{piece.player.player_name}}</td>
+</tr>
+{% endfor %}
+
+</table>

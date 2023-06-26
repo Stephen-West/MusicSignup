@@ -1,0 +1,54 @@
+{% if piece %}
+<h1>{{piece.piece_name}}</h1>
+<h2>{{piece.composer}}</h2>
+{{piece.source}}
+<p>
+
+<p>
+<p>
+
+<table border=1>
+<tr>
+	<th>Part</th>
+	<th>Instrument</th>
+	<th>Player</th>
+	<th>Action</th>
+</tr>
+{% for part in piece.part_set.all %}
+<tr>
+	<td>{{part.part_name}} </td>
+	<td>{{part.instrument.instrument_name}}</td>
+	<td>
+	<form method='post' >
+	{% csrf_token %}
+	{% if part.player.player_name == "Unassigned" %}
+		<select name="players" id="p">
+  			<option value = "Unassigned">Unassigned</option>
+			<option value={{user.first_name}}>{{user.first_name}}</option>
+  				
+		</select>
+		
+ 	{% elif part.player.player_name == user.first_name %}
+		<select name="players" id="p">
+			<option value={{user.first_name}}>{{user.first_name}}</option>
+  			<option value = "Unassigned">Unassigned</option>
+		</select>
+
+	{% else %}
+		{{part.player.player_name}}</td>
+	{% endif %}
+	</td>
+	<td>
+	{% if part.player.player_name == "Unassigned" or part.player.player_name == user.first_name %}
+		<input type="hidden" name="PartID" value={{part.id}}>
+		<input type="submit" value="Update_part">
+	{% endif %}
+	</td>
+	</form>
+	</tr>
+	{% endfor %}
+
+</table>
+
+
+{% endif %}

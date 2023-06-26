@@ -1,0 +1,28 @@
+<h1>Music signup site for viol groups</h1>
+
+{% if events %}
+    <table border=1>
+	<tr>
+		<th>Event</th>
+		<th>Date</th>
+		<th>Location</th>
+		<th>Attendees</th>
+	</tr>
+    	{% for event in events %}
+        <tr>
+		<td><a href="events/{{ event.id }}/">{{ event.event_name }}</a></td>
+		<td>{{event.date}}</td>
+		<td>{{event.location}}</td>
+		<td>{%for person in event.attendees.all %}{{person}}  {%endfor%}</td>
+	</tr>
+    	{% endfor %}
+	</table>
+
+{% else %}
+    <p>No events are available.</p>
+{% endif %}
+
+<p>
+<p>
+Click on the name of an event to see details of the music selected so far and to choose the instruments and parts that you want to play.
+

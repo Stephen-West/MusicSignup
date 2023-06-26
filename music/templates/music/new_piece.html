@@ -1,0 +1,54 @@
+
+<h1>Add a new piece to the database</h1>
+
+<form method='post' >
+{% csrf_token %}
+	
+<table border=1>
+	<tr align='left'>
+		<th>Title of piece</th>
+		<td>
+		</td>
+	</tr>
+	<tr align='left'>
+		<th>Composer</th>
+		<td>
+		</td>
+	</tr>
+	<tr align='left'>
+		<th>Source (where to get the music)</th
+		<td>
+		</td>
+	</tr>
+	<tr align='left'>
+	<tr>	
+		<th>Notes (anything else you want to add)</th>
+		<td>
+		</td>
+	</tr>
+</table>
+<p>
+
+<h2>Details of parts</h2>
+<br>Leave last rows blank if fewer than 6 parts.
+<table border=1>
+	<tr>
+		<th>Part name (eg Cantus)</th>
+		<th>Instrument (choose from list)</th>
+		<th>Notes (if any)</th>
+	</tr>
+
+	{% for i in '123456'|make_list %}
+	<tr>
+		<td>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	{% endfor %}
+
+</table>
+<input type="submit" value="new_piece">
+</form>

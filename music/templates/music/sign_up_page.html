@@ -1,0 +1,66 @@
+
+
+<center><h1>Summary of pieces, parts and players</h1>
+<h2>{{event.event_name}}, {{event.locatoin}}, {{event.date}}</h2>
+
+
+<table border>
+
+<tr>
+
+	<th>Piece</th><th colspan=6>Parts</th>
+</tr>
+{% for piece in event.piece_set.all %}
+<tr>
+	<th rowspan='2' align='left'>
+		<a href="/pieces/{{piece.id}}/">{{piece.piece_name}}</a> 
+	({{piece.composer}})
+	</th>
+	{% for part in piece.part_set.all %}
+	<th>
+		{{part.part_name}}<br>{{part.instrument.instrument_name}}
+	</th>
+	
+	{% endfor %}
+</tr>
+<tr>
+	{% for part in piece.part_set.all %}
+	<td>{{part.player.player_name}}</td>
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</center>
+
