@@ -28,15 +28,6 @@ def event_detail(request, pk):
 # Piece detail view
 ##################################
 def piece_detail(request, piece_id):
-	if request.method == "POST":
-		piece = request.session['piece']
-		PartID = request.POST['PartID']
-		new_player = Player.objects.get(player_name = request.POST['players'])
-		part_update = Part.objects.get(pk = PartID)
-		part_update.player = new_player
-		part_update.save()
-		#return(redirect, event_detail, "1")
-	
 	piece = get_object_or_404(Piece, pk=piece_id)
 	request.session['piece'] = piece_id
 	piece = get_object_or_404(Piece, pk=piece_id)
@@ -44,7 +35,7 @@ def piece_detail(request, piece_id):
 	return render(request, "music/piece_detail.html", {"piece" : piece, "event" : event_id})
 
 ##################################
-# Add pice view
+# Add piece view
 # for future work
 ##################################
 
@@ -67,14 +58,3 @@ def update_part(request):
 	return redirect(event_detail, pk=event_id)
 
 
-
-def my_view(request):
-	username = request.POST["username"]
-	password = request.POST["password"]
-	user = authenticate(request, username=username, password=password)
-	if user is not None:
-		login(request, user)
-		# Redirect to a success page.
-	else:
-		# Return an 'invalid login' error message.
-		pass
