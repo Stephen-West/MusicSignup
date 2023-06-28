@@ -1,0 +1,30 @@
+                      ---------------------------         
+                     |                           |
+                     |      Home page            |
+   /music/index.html |      List of events       |  index view
+                     |                           |  index.html template
+                     |___________________________|
+                                  |
+                                  | User clicks on event
+                                  V
+                      ---------------------------         
+                     |                           |
+                     |      Event page           |
+   /music/events/nn  |      Details of event     |  event_detail view
+                     |      Summary of pieces    |  event_detail.html
+                     |      & players            |   template
+                     |___________________________|
+                                  |
+                                  | User clicks on piece
+                                  V
+                      ---------------------------         
+                     |                           |
+                     |      Piece page           |
+   /music/pieces/nn  |      Details of piece     |  piece_detail view
+                     |      Dropdown menus       |  piece_detail.html
+                     |      for signup           |   template
+                     |___________________________|
+                                  |
+                                  | User clicks Submit
+                                  V
+                         Update datebase and return to Event page

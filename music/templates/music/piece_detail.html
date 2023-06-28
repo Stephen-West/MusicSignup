@@ -1,4 +1,5 @@
 {% if piece %}
+
 <h1>{{piece.piece_name}}</h1>
 <h2>{{piece.composer}}</h2>
 {{piece.source}}
@@ -19,7 +20,7 @@
 	<td>{{part.part_name}} </td>
 	<td>{{part.instrument.instrument_name}}</td>
 	<td>
-	<form method='post' >
+	<form method='post' action = {% url "update_part" %}>
 	{% csrf_token %}
 	{% if part.player.player_name == "Unassigned" %}
 		<select name="players" id="p">
@@ -50,5 +51,19 @@
 
 </table>
 
+{% else %}
+
+No piece found.
 
 {% endif %}
+
+<center>
+
+<p>
+
+<p>
+<a href ="{% url 'index' %}">Home page</a>
+{% if event %}
+<a href = "{% url 'event_detail' event %}">Back to current event</a>
+{% endif %}
+</center>

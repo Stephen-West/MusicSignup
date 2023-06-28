@@ -42,7 +42,7 @@ class Part(models.Model):
 	piece = models.ForeignKey(Piece , null=True, on_delete=models.CASCADE)
 	is_present = models.BooleanField(default=False)
 	part_name = models.CharField(max_length=200, null=True)
-	intrument = models.ForeignKey(Instrument, on_delete=models.CASCADE,  null=True)
+	instrument = models.ForeignKey(Instrument, on_delete=models.CASCADE,  null=True)
 	player = models.ForeignKey(Player, on_delete=models.CASCADE, default="Unassigned", null=True)
 	def __str__(self):
         	return self.part_name

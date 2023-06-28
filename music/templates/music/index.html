@@ -1,5 +1,6 @@
-<h1>Music signup site for viol groups</h1>
+<center><h1>Music signup site for viol groups</h1>
 
+{% if user.is_authenticated %}
 {% if events %}
     <table border=1>
 	<tr>
@@ -11,9 +12,9 @@
     	{% for event in events %}
         <tr>
 		<td><a href="events/{{ event.id }}/">{{ event.event_name }}</a></td>
-		<td>{{event.date}}</td>
+		<td>{{event.date|date:"d M Y"}}</td>
 		<td>{{event.location}}</td>
-		<td>{%for person in event.attendees.all %}{{person}}  {%endfor%}</td>
+		<td>{{event.attendees.all|join:', ' }}</td>
 	</tr>
     	{% endfor %}
 	</table>
@@ -25,4 +26,15 @@
 <p>
 <p>
 Click on the name of an event to see details of the music selected so far and to choose the instruments and parts that you want to play.
+
+
+<p>
+<a href="{% url 'logout' %}">Click here to Log Out</a></p>
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+
+</center>
 
