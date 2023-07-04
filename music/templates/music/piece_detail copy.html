@@ -1,8 +1,3 @@
-{% extends "base.html" %}
-{% block title %}Details and signup for {{piece.piece_name %}s{% endblock %}
-
-
-{% block content %}
 {% if user.is_authenticated %}
 {% if piece %}
 <center>
@@ -14,9 +9,8 @@
 <p>
 <p>
 
-In the following table, choose the part you want to play, 
-<br>select your name in the drop-down menu in the "Player" column <br>and press the adjacent "Select this part" button.
-<p>
+In the following table, choose the part you want to play, select your name in the drop-down menu in the "Player" column and press the adjacent "Select this part" button.
+
 <table border=1>
 <tr>
 	<th>Part</th>
@@ -24,7 +18,7 @@ In the following table, choose the part you want to play,
 	<th>Player</th>
 	<th>Action</th>
 </tr>
-{% for part in piece.part_set.all|dictsort:"order" %}
+{% for part in piece.part_set.all %}
 <tr>
 	<td>{{part.part_name}} </td>
 	<td>{{part.instrument.instrument_name}}</td>
@@ -76,18 +70,9 @@ No piece found.
 
 <p>
 <center>
-<p>
-Please don't sign up for more than one part! <br>
-If you want to de-select a part, change the player to "Unassigned" and and press the adjacent "Select this part" button. <br>
-You can then return to the page and select a new part.
-<p>
-<a href ="{% url 'index' %}">Home page</a> |
+<a href ="{% url 'index' %}">Home page</a>
 {% if event %}
-<a href = "{% url 'event_detail' event %}">Back to current event</a>  |
+<a href = "{% url 'event_detail' event %}">Back to current event</a>
+</center>
 {% endif %}
-<a href="{% url 'logout' %}">Log Out</a>
 </center>
-
-</center>
-
-{% endblock %}

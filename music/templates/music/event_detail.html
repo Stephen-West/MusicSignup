@@ -1,9 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Details of {{event.event_name}}{% endblock %}
 
+
+{% block content %}
 
 <center><h1>Summary of pieces, parts and players</h1>
-<h2>{{event.event_name}}, {{event.location}}, {{event.date}}</h2>
+<h3>{{event.event_name}}, {{event.location}}, {{event.date|date:"d M Y"}}<br>
 
+Attendees: 
+{% for a in event.attendees.all|dictsort:"first_name" %}
+	{{a.first_name}}
+{% endfor %}
+</h3>
 
+{% if event.piece_set.all == NULL %}
+
+No pieces available yet.
+
+{% else %}
+{% if user in event.attendees.all %}
+To sign up for parts, click on a piece in the table below. <p>
+{% endif %}
 <table border>
 
 <tr>
@@ -13,10 +30,14 @@
 {% for piece in event.piece_set.all %}
 <tr>
 	<th rowspan='2' align='left'>
-		<a href="/pieces/{{piece.id}}/">{{piece.piece_name}}</a> 
-	({{piece.composer}})
+		{% if user in event.attendees.all %}
+			<a href="/pieces/{{piece.id}}/">{{piece.piece_name}} ({{piece.composer}})</a> 
+		{% else %}
+			{{piece.piece_name}} ({{piece.composer}})
+		{% endif %}
+	
 	</th>
-	{% for part in piece.part_set.all %}
+	{% for part in piece.part_set.all|dictsort:"order" %}
 	<th>
 		{{part.part_name}}<br>{{part.instrument.instrument_name}}
 	</th>
@@ -25,15 +46,26 @@
 </tr>
 <tr>
 	{% for part in piece.part_set.all %}
-	<td>{{part.player.player_name}}</td>
+	<td>
+	{% if part.player.first_name %}
+		{{part.player.first_name}}
+	{% else %}
+		Unassigned
+	{% endif %}
+	</td>
 	{% endfor %}
 </tr>
 
 {% endfor %}
 </table>
 <p>
-<a href ="{% url 'index' %}">Home page</a>
+<a href ="{% url 'index' %}">Home page</a>  |
+<a href="{% url 'logout' %}">Log Out</a>
 </center>
+
+{% endif %}
+
+{% endblock %}
 
 
 	

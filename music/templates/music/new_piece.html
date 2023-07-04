@@ -8,22 +8,32 @@
 	<tr align='left'>
 		<th>Title of piece</th>
 		<td>
+		<input type="text" id="piece_name" name="piece_name">
 		</td>
 	</tr>
 	<tr align='left'>
 		<th>Composer</th>
 		<td>
+		<input type="text" id="composer" name="composer">
 		</td>
 	</tr>
 	<tr align='left'>
-		<th>Source (where to get the music)</th
+		<th>Source (where to get the music)</th>
 		<td>
+		<input type="text" id="source" name="source">
+		</td>
+	</tr>
+	<tr align='left'>
+		<th>Added by</th>
+		<td>
+		{{user.first_name}}
 		</td>
 	</tr>
 	<tr align='left'>
 	<tr>	
 		<th>Notes (anything else you want to add)</th>
 		<td>
+		<input type="text" id="notes" name="notes">
 		</td>
 	</tr>
 </table>
@@ -34,6 +44,7 @@
 <table border=1>
 	<tr>
 		<th>Part name (eg Cantus)</th>
+
 		<th>Instrument (choose from list)</th>
 		<th>Notes (if any)</th>
 	</tr>
@@ -41,10 +52,17 @@
 	{% for i in '123456'|make_list %}
 	<tr>
 		<td>
+		<input type="text" id="part_name{{i}}" name="part_name{{i}}">
 		</td>
 		<td>
+		<select name="instrument{{i}}" id="instrument{{i}}">
+			{% for i in instruments %}
+			<option value={{i}}>{{i}}</option>
+  			{% endfor %}
+		</select>
 		</td>
 		<td>
+		<input type="text" id="notes{{i}}" name="notes{{i}}">
 		</td>
 	</tr>
 	{% endfor %}

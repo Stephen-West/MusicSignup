@@ -1,6 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Music signup site for viol groups{% endblock %}
+
+
+{% block content %}
+
 <center><h1>Music signup site for viol groups</h1>
 
 {% if user.is_authenticated %}
+
 {% if events %}
     <table border=1>
 	<tr>
@@ -14,7 +21,11 @@
 		<td><a href="events/{{ event.id }}/">{{ event.event_name }}</a></td>
 		<td>{{event.date|date:"d M Y"}}</td>
 		<td>{{event.location}}</td>
-		<td>{{event.attendees.all|join:', ' }}</td>
+		<td>{{event.attendees.first_name.all|join:', ' }}
+		{% for a in event.attendees.all %}
+			{{a.first_name}}
+		{% endfor %}
+		</td>
 	</tr>
     	{% endfor %}
 	</table>
@@ -37,4 +48,6 @@ Click on the name of an event to see details of the music selected so far and to
 {% endif %}
 
 </center>
+
+{% endblock %}
 
